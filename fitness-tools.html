@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitness Tools - Sweatify</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-wrap{width:min(900px, calc(100% - 32px)); margin:40px auto 70px;}
+.page-card{background:#fff; border:1px solid #dfeae5; border-radius:16px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.05);} 
+.page-card h1{margin-top:0; color:#1a202c;}
+.page-card ul{padding-left:20px; color:#4f605a; line-height:1.7;}
+.page-img{width:100%; height:260px; object-fit:cover; border-radius:12px; margin-bottom:18px;}
+.page-actions{margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;}
+.tool-header{border:1px solid #d9e8e1; border-radius:12px; background:linear-gradient(135deg, #f3faf7 0%, #ecf6f1 100%); padding:16px 18px; margin-top:12px;}
+.tool-header p{margin:0; color:#4f605a;}
+.tool-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:16px; margin-top:20px;}
+.tool-card{border:1px solid #dce8e2; border-radius:12px; padding:16px; background:#f9fcfb; box-shadow:0 4px 16px rgba(0,0,0,0.03);}
+.tool-card h3{margin:0 0 10px; font-size:18px; color:#1f2d2a;}
+.tool-card p{margin:0 0 12px; color:#54645f; font-size:14px;}
+.tool-card label{display:block; margin:8px 0 5px; font-size:13px; font-weight:600; color:#2f3b36;}
+.tool-card input,.tool-card select{width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #cfded7; border-radius:8px; background:#fff;}
+.tool-card .btn{margin-top:12px; width:100%;}
+.tool-result{margin-top:10px; min-height:22px; font-size:14px; font-weight:600; color:#2d3a35;}
+.tool-note{font-size:12px; color:#6a7c75; margin-top:8px;}
+.progress-list{margin-top:12px; display:flex; flex-direction:column; gap:8px;}
+.progress-item{display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center; background:#ffffff; border:1px solid #dbe8e2; border-radius:10px; padding:10px;}
+.progress-item strong{color:#1f2d2a;}
+.progress-meta{font-size:13px; color:#566761;}
+.progress-empty{font-size:13px; color:#73857e;}
+.mini-btn{padding:6px 10px; border:1px solid #cadad3; border-radius:8px; background:#fff; color:#2d3a35; cursor:pointer;}
+.tool-card textarea{width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #cfded7; border-radius:8px; background:#fff; min-height:80px; resize:vertical; font-family:inherit;}
+.progress-card{grid-column:1/-1;}
+.progress-top-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.weight-graph-wrap{margin-top:14px; background:#ffffff; border:1px solid #dbe8e2; border-radius:10px; padding:10px;}
+#weight-graph{width:100%; height:180px; display:block;}
+.weight-summary{margin-top:8px; font-size:13px; color:#4f605a;}
+
+@media (max-width: 700px){
+.progress-top-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+<div class="page-card">
+<img class="page-img" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80" alt="Fitness tracking tools">
+<h1>Fitness Tools</h1>
+<p>Track workouts, body metrics, and progress over time.</p>
+<div class="tool-header">
+<p>Use calculators for quick insights and track your weight journey with a goal vs current graph.</p>
+</div>
+<ul>
+<li>Workout and rep tracker</li>
+<li>Progress charts and milestones</li>
+<li>Body measurement logging</li>
+</ul>
+
+<div class="tool-grid">
+<section class="tool-card">
+<h3>BMI Calculator</h3>
+<p>Enter your height and weight to check your BMI range.</p>
+<label for="bmi-height">Height (cm)</label>
+<input id="bmi-height" type="number" min="80" max="250" placeholder="e.g. 170">
+<label for="bmi-weight">Weight (kg)</label>
+<input id="bmi-weight" type="number" min="25" max="300" placeholder="e.g. 65">
+<button class="btn btn-primary" type="button" onclick="calculateBMI()">Calculate BMI</button>
+<div id="bmi-result" class="tool-result"></div>
+</section>
+
+<section class="tool-card">
+<h3>Body Fat Calculator</h3>
+<p>Quick estimate using BMI method.</p>
+<label for="bf-age">Age</label>
+<input id="bf-age" type="number" min="10" max="90" placeholder="e.g. 24">
+<label for="bf-gender">Gender</label>
+<select id="bf-gender">
+<option value="female">Female</option>
+<option value="male">Male</option>
+</select>
+<label for="bf-height">Height (cm)</label>
+<input id="bf-height" type="number" min="80" max="250" placeholder="e.g. 170">
+<label for="bf-weight">Weight (kg)</label>
+<input id="bf-weight" type="number" min="25" max="300" placeholder="e.g. 65">
+<button class="btn btn-primary" type="button" onclick="calculateBodyFat()">Estimate Body Fat</button>
+<div id="bf-result" class="tool-result"></div>
+<div class="tool-note">Note: This is an estimate, not a medical measurement.</div>
+</section>
+
+<section class="tool-card">
+<h3>Calories Scanner</h3>
+<p>Select food and quantity to estimate calories.</p>
+<label for="cal-food">Food Item</label>
+<select id="cal-food">
+<option value="120">Banana (1 medium)</option>
+<option value="165">Chicken Breast (100g)</option>
+<option value="130">Boiled Egg (2 eggs)</option>
+<option value="204">Brown Rice (1 cup)</option>
+<option value="95">Apple (1 medium)</option>
+<option value="280">Paneer (100g)</option>
+<option value="155">Oats (1 bowl)</option>
+</select>
+<label for="cal-qty">Quantity</label>
+<input id="cal-qty" type="number" min="1" max="10" value="1">
+<button class="btn btn-primary" type="button" onclick="scanCalories()">Scan Calories</button>
+<div id="cal-result" class="tool-result"></div>
+</section>
+
+<section class="tool-card progress-card">
+<h3>Progress Tracker</h3>
+<p>Save your daily body and workout progress.</p>
+<div class="progress-top-grid">
+<div>
+<label for="goal-weight">Goal Weight (kg)</label>
+<input id="goal-weight" type="number" min="25" max="300" placeholder="e.g. 60">
+<button class="btn" type="button" onclick="updateGoalWeight()">Save Goal Weight</button>
+</div>
+<div class="weight-graph-wrap">
+<canvas id="weight-graph" width="760" height="180"></canvas>
+<div id="weight-summary" class="weight-summary">Add goal and current weight to see graph.</div>
+</div>
+</div>
+<label for="progress-date">Date</label>
+<input id="progress-date" type="date">
+<label for="progress-weight">Weight (kg)</label>
+<input id="progress-weight" type="number" min="25" max="300" placeholder="e.g. 65">
+<label for="progress-bodyfat">Body Fat % (optional)</label>
+<input id="progress-bodyfat" type="number" min="3" max="60" step="0.1" placeholder="e.g. 18.5">
+<label for="progress-notes">Workout Notes</label>
+<textarea id="progress-notes" placeholder="e.g. Leg day, 45 min cardio, felt strong"></textarea>
+<button class="btn btn-primary" type="button" onclick="addProgressEntry()">Save Progress</button>
+<div id="progress-result" class="tool-result"></div>
+<div id="progress-list" class="progress-list"></div>
+</section>
+</div>
+
+<div class="page-actions">
+<a href="inex.html#services" class="btn">Back to Services</a>
+<a href="inex.html" class="btn btn-primary">Go Home</a>
+</div>
+</div>
+</div>
+
+<script>
+function calculateBMI(){
+const height = Number(document.getElementById('bmi-height').value);
+const weight = Number(document.getElementById('bmi-weight').value);
+const result = document.getElementById('bmi-result');
+
+if(!height || !weight){
+result.textContent = 'Please enter valid height and weight.';
+return;
+}
+
+const bmi = weight / Math.pow(height / 100, 2);
+let category = 'Obese';
+
+if(bmi < 18.5){
+category = 'Underweight';
+}else if(bmi < 25){
+category = 'Normal';
+}else if(bmi < 30){
+category = 'Overweight';
+}
+
+result.textContent = 'BMI: ' + bmi.toFixed(1) + ' (' + category + ')';
+}
+
+function calculateBodyFat(){
+const age = Number(document.getElementById('bf-age').value);
+const gender = document.getElementById('bf-gender').value;
+const height = Number(document.getElementById('bf-height').value);
+const weight = Number(document.getElementById('bf-weight').value);
+const result = document.getElementById('bf-result');
+
+if(!age || !height || !weight){
+result.textContent = 'Please enter age, height, and weight.';
+return;
+}
+
+const bmi = weight / Math.pow(height / 100, 2);
+const sexValue = gender === 'male' ? 1 : 0;
+const bodyFat = (1.2 * bmi) + (0.23 * age) - (10.8 * sexValue) - 5.4;
+
+result.textContent = 'Estimated Body Fat: ' + bodyFat.toFixed(1) + '%';
+}
+
+function scanCalories(){
+const foodCalories = Number(document.getElementById('cal-food').value);
+const quantity = Number(document.getElementById('cal-qty').value);
+const result = document.getElementById('cal-result');
+
+if(!quantity || quantity < 1){
+result.textContent = 'Please enter a valid quantity.';
+return;
+}
+
+const totalCalories = foodCalories * quantity;
+result.textContent = 'Estimated Calories: ' + totalCalories.toFixed(0) + ' kcal';
+}
+
+function getProgressEntries(){
+const raw = localStorage.getItem('sweatify-progress');
+if(!raw){
+return [];
+}
+
+try{
+const parsed = JSON.parse(raw);
+return Array.isArray(parsed) ? parsed : [];
+}catch(error){
+return [];
+}
+}
+
+function getGoalWeight(){
+const value = Number(localStorage.getItem('sweatify-goal-weight'));
+return value > 0 ? value : 0;
+}
+
+function saveGoalWeight(goalWeight){
+localStorage.setItem('sweatify-goal-weight', String(goalWeight));
+}
+
+function saveProgressEntries(entries){
+localStorage.setItem('sweatify-progress', JSON.stringify(entries));
+}
+
+function estimateMonthsToGoal(entries, currentWeight, goalWeight){
+const validEntries = entries
+.map((entry) => ({
+date: new Date(entry.date),
+weight: Number(entry.weight)
+}))
+.filter((entry) => !Number.isNaN(entry.weight) && !Number.isNaN(entry.date.getTime()))
+.sort((a, b) => a.date.getTime() - b.date.getTime());
+
+if(validEntries.length < 2){
+return null;
+}
+
+const first = validEntries[0];
+const last = validEntries[validEntries.length - 1];
+const daysElapsed = (last.date.getTime() - first.date.getTime()) / (1000 * 60 * 60 * 24);
+
+if(daysElapsed < 7){
+return null;
+}
+
+const monthsElapsed = daysElapsed / 30.44;
+const targetDirection = goalWeight > currentWeight ? 1 : -1;
+const directionalChange = (last.weight - first.weight) * targetDirection;
+const progressPerMonth = directionalChange / monthsElapsed;
+
+if(progressPerMonth <= 0){
+return Infinity;
+}
+
+const remainingDistance = Math.abs(goalWeight - currentWeight);
+return remainingDistance / progressPerMonth;
+}
+
+function escapeHtml(value){
+return String(value)
+.replace(/&/g, '&amp;')
+.replace(/</g, '&lt;')
+.replace(/>/g, '&gt;')
+.replace(/"/g, '&quot;')
+.replace(/'/g, '&#39;');
+}
+
+function updateGoalWeight(){
+const goalWeight = Number(document.getElementById('goal-weight').value);
+const result = document.getElementById('progress-result');
+
+if(!goalWeight || goalWeight < 25 || goalWeight > 300){
+result.textContent = 'Enter a valid goal weight between 25 and 300 kg.';
+return;
+}
+
+saveGoalWeight(goalWeight);
+result.textContent = 'Goal weight saved.';
+renderWeightGraph();
+}
+
+function renderWeightGraph(){
+const canvas = document.getElementById('weight-graph');
+const summary = document.getElementById('weight-summary');
+if(!canvas || !summary){
+return;
+}
+
+const ctx = canvas.getContext('2d');
+const entries = getProgressEntries();
+const currentWeight = entries.length > 0 ? Number(entries[0].weight) : 0;
+const goalWeight = getGoalWeight();
+
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+if(!currentWeight || !goalWeight){
+summary.textContent = 'Add both current and goal weight to see graph.';
+return;
+}
+
+const maxValue = Math.max(currentWeight, goalWeight) * 1.15;
+const baselineY = 145;
+const barWidth = 140;
+const gap = 110;
+const startX = (canvas.width - ((barWidth * 2) + gap)) / 2;
+
+function drawBar(x, value, color, label){
+const barHeight = Math.max(8, (value / maxValue) * 110);
+const y = baselineY - barHeight;
+
+ctx.fillStyle = color;
+ctx.fillRect(x, y, barWidth, barHeight);
+
+ctx.fillStyle = '#23302c';
+ctx.font = '14px Poppins, sans-serif';
+ctx.textAlign = 'center';
+ctx.fillText(label, x + (barWidth / 2), 165);
+ctx.fillText(value.toFixed(1) + ' kg', x + (barWidth / 2), y - 8);
+}
+
+ctx.strokeStyle = '#dbe8e2';
+ctx.beginPath();
+ctx.moveTo(80, baselineY + 0.5);
+ctx.lineTo(canvas.width - 80, baselineY + 0.5);
+ctx.stroke();
+
+drawBar(startX, currentWeight, '#42564F', 'Current Weight');
+drawBar(startX + barWidth + gap, goalWeight, '#7ea996', 'Goal Weight');
+
+const diff = currentWeight - goalWeight;
+if(diff > 0){
+summary.textContent = 'You are ' + diff.toFixed(1) + ' kg above your goal.';
+}else if(diff < 0){
+summary.textContent = 'You are ' + Math.abs(diff).toFixed(1) + ' kg below your goal.';
+}else{
+summary.textContent = 'Great work. You reached your goal weight.';
+return;
+}
+
+const monthsToGoal = estimateMonthsToGoal(entries, currentWeight, goalWeight);
+if(monthsToGoal === null){
+summary.textContent += ' Add at least 2 dated entries over a week to estimate months.';
+}else if(monthsToGoal === Infinity){
+summary.textContent += ' Current trend is moving away from goal.';
+}else{
+summary.textContent += ' Estimated time to goal: about ' + monthsToGoal.toFixed(1) + ' month(s).';
+}
+}
+
+function renderProgressEntries(){
+const list = document.getElementById('progress-list');
+if(!list){
+return;
+}
+
+const entries = getProgressEntries();
+if(entries.length === 0){
+list.innerHTML = '<div class="progress-empty">No progress saved yet.</div>';
+renderWeightGraph();
+return;
+}
+
+list.innerHTML = entries.map((entry, index) => {
+const bodyFatText = entry.bodyFat ? ' | Body Fat: ' + entry.bodyFat + '%' : '';
+const notesText = entry.notes ? ' | Notes: ' + escapeHtml(entry.notes) : '';
+return '<div class="progress-item">'
+	+ '<div class="progress-meta"><strong>' + escapeHtml(entry.date) + '</strong> | Weight: ' + entry.weight + ' kg' + bodyFatText + notesText + '</div>'
+	+ '<button class="mini-btn" type="button" onclick="deleteProgressEntry(' + index + ')">Delete</button>'
+	+ '</div>';
+}).join('');
+
+renderWeightGraph();
+}
+
+function addProgressEntry(){
+const date = document.getElementById('progress-date').value;
+const weight = Number(document.getElementById('progress-weight').value);
+const bodyFat = document.getElementById('progress-bodyfat').value.trim();
+const notes = document.getElementById('progress-notes').value.trim();
+const result = document.getElementById('progress-result');
+
+if(!date || !weight){
+result.textContent = 'Please enter date and weight.';
+return;
+}
+
+const entries = getProgressEntries();
+entries.unshift({
+date: date,
+weight: weight,
+bodyFat: bodyFat,
+notes: notes
+});
+
+saveProgressEntries(entries.slice(0, 30));
+result.textContent = 'Progress saved successfully.';
+renderProgressEntries();
+}
+
+function deleteProgressEntry(index){
+const entries = getProgressEntries();
+entries.splice(index, 1);
+saveProgressEntries(entries);
+renderProgressEntries();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+const dateInput = document.getElementById('progress-date');
+const goalInput = document.getElementById('goal-weight');
+if(dateInput && !dateInput.value){
+dateInput.value = new Date().toISOString().slice(0, 10);
+}
+
+const savedGoal = getGoalWeight();
+if(goalInput && savedGoal){
+goalInput.value = savedGoal;
+}
+
+renderProgressEntries();
+});
+</script>
+</body>
+</html>

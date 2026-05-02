@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Back Workout - Sweatify</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-wrap{width:min(980px, calc(100% - 32px)); margin:40px auto 70px;}
+.page-card{background:#fff; border:1px solid #dfeae5; border-radius:16px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.05);} 
+.page-card h1{margin-top:0; color:#1a202c;}
+.page-img{width:100%; height:300px; object-fit:cover; border-radius:12px; margin-bottom:18px;}
+.exercise-grid{display:flex; flex-direction:column; gap:16px; margin-top:18px;}
+.exercise-item{border:1px solid #dfeae5; border-radius:14px; overflow:hidden; background:#f8fbf9; box-shadow:0 6px 16px rgba(0,0,0,0.04); display:grid; grid-template-columns:minmax(0,1fr) 230px; column-gap:14px; align-items:stretch; padding:12px;}
+.exercise-item img{grid-column:2; grid-row:1 / span 3; width:100%; height:100%; min-height:170px; object-fit:cover; display:block; border-radius:10px;}
+.exercise-item h3{grid-column:1; font-size:16px; margin:0 0 6px; color:#1a202c;}
+.exercise-item p{grid-column:1; font-size:13px; margin:0 0 10px; color:#55655f; line-height:1.5;}
+.exercise-item .exercise-procedure{grid-column:1; margin:0;}
+@media (max-width:700px){.exercise-item{grid-template-columns:1fr;} .exercise-item img{grid-column:1; grid-row:auto; min-height:140px; margin-bottom:10px;}}
+.page-actions{margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+<div class="page-card">
+<img class="page-img" src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=1200&q=80" alt="Back workout">
+<h1>Back Workout</h1>
+<p>Improve pulling power, posture, and upper-back strength.</p>
+<div class="exercise-grid">
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=80" alt="Pull-ups"><h3>Pull-ups</h3><p>Build width and body control.</p><ol class="exercise-procedure"><li>Grip the bar slightly wider than shoulder width.</li><li>Pull your chest up toward the bar.</li><li>Lower yourself under control to a full hang.</li></ol></div>
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=80&sat=-100" alt="Lat pulldown"><h3>Lat Pulldown</h3><p>Controlled pulling for lats.</p><ol class="exercise-procedure"><li>Hold the bar with a wide grip and sit tall.</li><li>Pull the bar down to the upper chest.</li><li>Slowly return the bar overhead.</li></ol></div>
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=80&blur=1" alt="Seated row"><h3>Seated Row</h3><p>Targets the mid-back muscles.</p><ol class="exercise-procedure"><li>Keep your chest up and spine neutral.</li><li>Pull the handle toward your torso.</li><li>Extend arms forward without losing posture.</li></ol></div>
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=80&h=700" alt="Deadlift"><h3>Deadlift</h3><p>Strengthens the full posterior chain.</p><ol class="exercise-procedure"><li>Stand with feet hip-width and grip the bar.</li><li>Drive through your legs to lift the bar with a straight back.</li><li>Lower it back down with control.</li></ol></div>
+</div>
+<div class="page-actions">
+<a href="inex.html#exercises" class="btn">Back to Exercises</a>
+<a href="inex.html" class="btn btn-primary">Go Home</a>
+</div>
+</div>
+</div>
+</body>
+</html>

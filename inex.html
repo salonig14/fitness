@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweatify - Fitness App</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+<img src="WhatsApp Image 2026-04-13 at 18.04.29.jpeg" alt="Sweatify Logo" class="logo-img">
+<span class="logo-text">Sweatify</span>
+</div>
+
+<nav class="nav-links">
+<a href="#home">Home</a>
+<a href="#services">Programs</a>
+<a href="#exercises">Exercises</a>
+<a href="#coaches">Coaching</a>
+<a href="#plans">Membership</a>
+<a href="#contact">About</a>
+</nav>
+
+<div class="nav-right">
+<div id="auth-buttons" class="auth-buttons">
+<a class="btn btn-primary" href="#contact">Join</a>
+</div>
+
+<div id="user-profile" class="user-profile hidden">
+<img id="user-avatar" class="user-avatar" src="" alt="Pokemon profile" onclick="openUserPopup()">
+</div>
+
+<div id="user-popup" class="user-popup hidden">
+<div class="user-popup-content">
+<button class="user-popup-close" type="button" aria-label="Close" onclick="closeUserPopup()">&times;</button>
+<img id="popup-avatar" class="popup-avatar" src="" alt="Profile">
+<div class="popup-user-info">
+<h3 id="popup-name"></h3>
+<p id="popup-email"></p>
+<p id="popup-bmi"></p>
+<p id="popup-plan"></p>
+</div>
+<button class="btn btn-primary logout-btn" type="button" onclick="logoutUser()">Logout</button>
+</div>
+</div>
+</div>
+
+</header>
+
+<section class="hero" id="home">
+<div class="hero-content">
+<h1>Achieve Your Fitness Goals With Sweatify</h1>
+<p>Join the Sweatify community and transform your fitness journey.</p>
+
+<div class="hero-actions">
+<button class="btn btn-primary">Start Your Journey</button>
+<button class="btn">Explore Programs</button>
+</div>
+
+<div class="stats">
+<div class="stat">+1300 Reviews</div>
+<div class="stat">+80 Coaches</div>
+<div class="stat">96% Success</div>
+</div>
+
+</div>
+
+<img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b" alt="Fitness training" class="hero-image">
+
+</section>
+
+<section class="section" id="services">
+<h2>Our Services</h2>
+<div class="cards">
+
+<div class="card service-card">
+<img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=900&q=80" alt="Workout plan service" class="service-image">
+<h3><a href="workout-plans.html" class="service-title-link">Workout Plans</a></h3>
+<p>Personalized workout plans</p>
+<a href="#contact" class="btn btn-primary" onclick="return openServicePage('workout-plans.html', event)">Learn More</a>
+</div>
+
+<div class="card service-card">
+<img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=80" alt="Nutrition service" class="service-image">
+<h3><a href="nutrition.html" class="service-title-link">Nutrition</a></h3>
+<p>Healthy diet plans</p>
+<a href="#contact" class="btn btn-primary" onclick="return openServicePage('nutrition.html', event)">Learn More</a>
+</div>
+
+<div class="card service-card">
+<img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80" alt="Coaching service" class="service-image">
+<h3><a href="coaching.html" class="service-title-link">Coaching</a></h3>
+<p>Expert trainers</p>
+<a href="#contact" class="btn btn-primary" onclick="return openServicePage('coaching.html', event)">Learn More</a>
+</div>
+
+<div class="card service-card">
+<img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80" alt="Fitness tools service" class="service-image">
+<h3><a href="fitness-tools.html" class="service-title-link">Fitness Tools</a></h3>
+<p>Track your progress</p>
+<a href="#contact" class="btn btn-primary" onclick="return openServicePage('fitness-tools.html', event)">Learn More</a>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="exercises">
+<h2>Whole Body Exercises</h2>
+<p class="exercise-subtitle">Train every major body part with focused workouts and proper form.</p>
+
+<div class="bodyparts-grid">
+<article class="bodypart-card">
+<a href="#contact" class="bodypart-link" onclick="return openExercisePage('chest-workout.html', event)">
+<img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=800&q=80" alt="Chest workout" class="bodypart-image">
+</a>
+<h3><a href="#contact" class="service-title-link" onclick="return openExercisePage('chest-workout.html', event)">Chest</a></h3>
+<p>Build upper body strength and better posture.</p>
+<a href="#contact" class="bodypart-see" onclick="return openExercisePage('chest-workout.html', event)">See →</a>
+</article>
+
+<article class="bodypart-card">
+<a href="#contact" class="bodypart-link" onclick="return openExercisePage('back-workout.html', event)">
+<img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" alt="Back workout" class="bodypart-image">
+</a>
+<h3><a href="#contact" class="service-title-link" onclick="return openExercisePage('back-workout.html', event)">Back</a></h3>
+<p>Improve pulling strength and spine support.</p>
+<a href="#contact" class="bodypart-see" onclick="return openExercisePage('back-workout.html', event)">See →</a>
+</article>
+
+<article class="bodypart-card">
+<a href="#contact" class="bodypart-link" onclick="return openExercisePage('legs-workout.html', event)">
+<img src="https://images.unsplash.com/photo-1434682881908-b43d0467b798?auto=format&fit=crop&w=800&q=80" alt="Leg workout" class="bodypart-image">
+</a>
+<h3><a href="#contact" class="service-title-link" onclick="return openExercisePage('legs-workout.html', event)">Legs</a></h3>
+<p>Increase power, balance, and daily movement capacity.</p>
+<a href="#contact" class="bodypart-see" onclick="return openExercisePage('legs-workout.html', event)">See →</a>
+</article>
+
+<article class="bodypart-card">
+<a href="#contact" class="bodypart-link" onclick="return openExercisePage('shoulders-workout.html', event)">
+<img src="https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=800&q=80" alt="Shoulder workout" class="bodypart-image">
+</a>
+<h3><a href="#contact" class="service-title-link" onclick="return openExercisePage('shoulders-workout.html', event)">Shoulders</a></h3>
+<p>Develop stable, strong, and injury-resistant shoulders.</p>
+<a href="#contact" class="bodypart-see" onclick="return openExercisePage('shoulders-workout.html', event)">See →</a>
+</article>
+
+<article class="bodypart-card">
+<a href="#contact" class="bodypart-link" onclick="return openExercisePage('arms-workout.html', event)">
+<img src="pic/arms.jpeg" alt="Arms workout" class="bodypart-image">
+</a>
+<h3><a href="#contact" class="service-title-link" onclick="return openExercisePage('arms-workout.html', event)">Arms</a></h3>
+<p>Target biceps and triceps for balanced arm growth.</p>
+<a href="#contact" class="bodypart-see" onclick="return openExercisePage('arms-workout.html', event)">See →</a>
+</article>
+
+<article class="bodypart-card">
+<a href="#contact" class="bodypart-link" onclick="return openExercisePage('core-workout.html', event)">
+<img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80" alt="Core workout" class="bodypart-image">
+</a>
+<h3><a href="#contact" class="service-title-link" onclick="return openExercisePage('core-workout.html', event)">Core</a></h3>
+<p>Build stability and protect your lower back.</p>
+<a href="#contact" class="bodypart-see" onclick="return openExercisePage('core-workout.html', event)">See →</a>
+</article>
+</div>
+</section>
+
+<section class="section" id="coaches">
+<h2>Meet Our Coaches</h2>
+<div class="cards">
+
+<div class="card coach-card">
+<h3>Emma Carter</h3>
+<p class="coach-role">Strength Coach</p>
+<p>Certified trainer focused on muscle building, safe lifting, and performance routines.</p>
+</div>
+
+<div class="card coach-card">
+<h3>Ryan Blake</h3>
+<p class="coach-role">Nutrition Coach</p>
+<p>Helps members build sustainable meal plans for fat loss, energy, and long-term health.</p>
+</div>
+
+<div class="card coach-card">
+<h3>Sophia Lee</h3>
+<p class="coach-role">Yoga & Mobility Coach</p>
+<p>Improves flexibility, posture, and recovery using mobility sessions and guided yoga flows.</p>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="plans">
+<h2>Our Plans</h2>
+<p class="plans-subtitle">Choose the perfect plan tailored to your fitness journey</p>
+
+<div class="pricing">
+
+<div class="price-card">
+<h3>Beginner Plan</h3>
+<div class="price">$49<span>/month</span></div>
+<p class="plan-description">Perfect for starting your fitness journey</p>
+<ul class="plan-features">
+<li>✓ Access to 50+ beginner workout routines</li>
+<li>✓ Full-body exercise library with video tutorials</li>
+<li>✓ Basic nutrition guide and meal plans</li>
+<li>✓ Progress tracking dashboard</li>
+<li>✓ Mobile app access</li>
+<li>✓ Community forum access</li>
+<li>✓ Email support</li>
+</ul>
+<button class="btn btn-primary" type="button" onclick="choosePlan('Beginner Plan')">Choose Plan</button>
+</div>
+
+<div class="price-card featured">
+<h3>Pro Plan</h3>
+<div class="price">$99<span>/month</span></div>
+<p class="plan-description">For serious fitness enthusiasts</p>
+<ul class="plan-features">
+<li>✓ Everything in Beginner Plan, plus:</li>
+<li>✓ 200+ intermediate to advanced workouts</li>
+<li>✓ Personalized workout recommendations</li>
+<li>✓ Detailed nutrition planning with macro tracking</li>
+<li>✓ Weekly progress reports and analytics</li>
+<li>✓ 2 virtual coaching sessions per month</li>
+<li>✓ Priority email and chat support</li>
+<li>✓ Access to exclusive member-only content</li>
+</ul>
+<button class="btn btn-primary" type="button" onclick="choosePlan('Pro Plan')">Choose Plan</button>
+</div>
+
+<div class="price-card">
+<h3>Custom Plan</h3>
+<div class="price">$149<span>/month</span></div>
+<p class="plan-description">Ultimate personalized experience</p>
+<ul class="plan-features">
+<li>✓ Everything in Pro Plan, plus:</li>
+<li>✓ 1-on-1 personalized training program</li>
+<li>✓ Unlimited video coaching sessions</li>
+<li>✓ Custom nutrition plan (designed by nutritionist)</li>
+<li>✓ Daily performance monitoring and adjustments</li>
+<li>✓ Recovery and supplementation guidance</li>
+<li>✓ Priority phone and live chat support</li>
+<li>✓ Exclusive merchandise and discounts</li>
+</ul>
+<button class="btn btn-primary" type="button" onclick="choosePlan('Custom Plan')">Choose Plan</button>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="testimonials">
+<h2>What Our Customers Say</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Steven Howard</h3>
+<p>Amazing experience and great coaches!</p>
+</div>
+
+<div class="card">
+<h3>Josh Oliver</h3>
+<p>Best fitness platform I used.</p>
+</div>
+
+<div class="card">
+<h3>Edward Hawley</h3>
+<p>Highly recommended!</p>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="contact">
+<h2>Join Our Fitness Community</h2>
+
+<div class="community-layout">
+<div class="community-left">
+<p class="community-intro">Sign up now to unlock exclusive access to personalized workout plans, expert coaching, and a supportive community that will help you achieve your fitness goals.</p>
+
+<div class="community-grid">
+<div class="community-item">
+<h3>Personalized Workout Plans</h3>
+<p>Customized routines that match your fitness level and goals, ensuring you achieve the best results in the most efficient way.</p>
+</div>
+
+<div class="community-item">
+<h3>Expert Coaching</h3>
+<p>Work with certified trainers who will guide you every step of the way to ensure you're on the right track.</p>
+</div>
+
+<div class="community-item">
+<h3>Community Support</h3>
+<p>Join a vibrant community of fitness enthusiasts where you can share experiences, get motivated, and stay inspired.</p>
+</div>
+
+<div class="community-item">
+<h3>Exclusive Resources</h3>
+<p>Access premium content, including video tutorials, nutrition guides, and member-only discounts on fitness gear.</p>
+</div>
+</div>
+</div>
+
+<div class="community-right">
+<div class="auth-switch">
+<button class="auth-tab active" type="button" onclick="showCommunityForm('signup')">Sign Up</button>
+<button class="auth-tab" type="button" onclick="showCommunityForm('login')">Login</button>
+</div>
+
+<form id="signup-form" class="community-form active" >
+<label for="signup-name">Name</label>
+<input id="signup-name" type="text" placeholder="Enter Your Name" required>
+
+<label for="signup-email">E-Mail</label>
+<input id="signup-email" type="email" placeholder="Enter Your E-Mail" required>
+
+<label for="signup-password">Password</label>
+<input id="signup-password" type="password" placeholder="Create Password" required>
+
+<label for="signup-plan">Plan</label>
+<select id="signup-plan" required>
+<option value="Beginner Plan">Beginner Plan</option>
+<option value="Pro Plan">Pro Plan</option>
+<option value="Custom Plan">Custom Plan</option>
+</select>
+
+<label for="signup-height">Height (cm)</label>
+<input id="signup-height" type="number" min="80" max="250" placeholder="Enter Height" required>
+
+<label for="signup-weight">Weight (kg)</label>
+<input id="signup-weight" type="number" min="25" max="300" placeholder="Enter Weight" required>
+
+<button class="btn btn-primary community-submit" type="submit">Sign Up</button>
+
+<div class="or-divider">Or</div>
+
+<button class="btn community-google" type="button">Sign Up With Google</button>
+</form>
+
+<form id="login-form" class="community-form" action="#" >
+<label for="login-email">E-Mail</label>
+<input id="login-email" type="email" placeholder="Enter Your E-Mail" required>
+
+<label for="login-password">Password</label>
+<input id="login-password" type="password" placeholder="Enter Your Password" required>
+
+<button class="btn btn-primary community-submit" type="submit">Login</button>
+</form>
+
+<div id="community-welcome-message" class="community-welcome hidden">
+<h3>Welcome to Sweatify Community!</h3>
+<p>Thank you for being part of our community. We're excited to have you on board!</p>
+<p>You now have access to exclusive workout plans, expert coaching, and a supportive community of fitness enthusiasts.</p>
+<p>Let's achieve your fitness goals together! 💪</p>
+</div>
+
+<p id="community-auth-message" class="auth-message" aria-live="polite"></p>
+</div>
+</div>
+
+</section>
+
+<footer>
+<div class="footer-container">
+
+<div class="footer-section">
+<h3>Sweatify</h3>
+<p>Transform Your Body With Sweatify</p>
+<p>Join our fitness community and achieve your goals</p>
+</div>
+
+<div class="footer-section">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#services">Programs</a></li>
+<li><a href="#plans">Membership</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</div>
+
+<div class="footer-section">
+<h4>About Us</h4>
+<ul>
+<li><a href="#">Our Story</a></li>
+<li><a href="#">Our Team</a></li>
+<li><a href="#">Blog</a></li>
+<li><a href="#">Career</a></li>
+</ul>
+</div>
+
+<div class="footer-section">
+<h4>Support</h4>
+<ul>
+<li><a href="#">Help Center</a></li>
+<li><a href="#">FAQs</a></li>
+<li><a href="#">Privacy Policy</a></li>
+<li><a href="#">Terms & Conditions</a></li>
+</ul>
+</div>
+
+<div class="footer-section">
+<h4>Contact Info</h4>
+<p>Email: info@sweatify.com</p>
+<p>Phone: +1 (555) 123-4567</p>
+<p>Address: 123 Fitness St, Gym City 12345</p>
+</div>
+
+<div class="footer-section">
+<h4>Follow Us</h4>
+<div class="social-links">
+<a href="#" class="social-icon">f</a>
+<a href="#" class="social-icon">T</a>
+<a href="#" class="social-icon">📷</a>
+<a href="#" class="social-icon">in</a>
+</div>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+<p>© 2026 Sweatify. All rights reserved.</p>
+</div>
+</footer>
+
+<div class="modal" id="loginModal">
+<div class="modal-content">
+<span class="close" onclick="closeLogin()">&times;</span>
+<h2>Login</h2>
+<div class="login-vertical">
+<input type="email" placeholder="Email">
+<input type="password" placeholder="Password">
+<button class="btn btn-primary">Login</button>
+</div>
+</div>
+</div>
+
+<div class="modal" id="signupModal">
+<div class="modal-content">
+<span class="close" onclick="closeSignup()">&times;</span>
+<h2>Sign Up</h2>
+<div class="signup-vertical">
+<input type="text" placeholder="Name">
+<input type="email" placeholder="Email">
+<input placeholder="Password" type="password">
+<button class="btn btn-primary">Sign Up</button>
+</div>
+</div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

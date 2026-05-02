@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arms Workout - Sweatify</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-wrap{width:min(980px, calc(100% - 32px)); margin:40px auto 70px;}
+.page-card{background:#fff; border:1px solid #dfeae5; border-radius:16px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.05);} 
+.page-card h1{margin-top:0; color:#1a202c;}
+.page-img{width:100%; height:300px; object-fit:cover; border-radius:12px; margin-bottom:18px;}
+.exercise-grid{display:flex; flex-direction:column; gap:16px; margin-top:18px;}
+.exercise-item{border:1px solid #dfeae5; border-radius:14px; overflow:hidden; background:#f8fbf9; box-shadow:0 6px 16px rgba(0,0,0,0.04); display:grid; grid-template-columns:minmax(0,1fr) 230px; column-gap:14px; align-items:stretch; padding:12px;}
+.exercise-item img{grid-column:2; grid-row:1 / span 3; width:100%; height:100%; min-height:170px; object-fit:cover; display:block; border-radius:10px;}
+.exercise-item h3{grid-column:1; font-size:16px; margin:0 0 6px; color:#1a202c;}
+.exercise-item p{grid-column:1; font-size:13px; margin:0 0 10px; color:#55655f; line-height:1.5;}
+.exercise-item .exercise-procedure{grid-column:1; margin:0;}
+@media (max-width:700px){.exercise-item{grid-template-columns:1fr;} .exercise-item img{grid-column:1; grid-row:auto; min-height:140px; margin-bottom:10px;}}
+.page-actions{margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+<div class="page-card">
+<img class="page-img" src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80" alt="Arms workout">
+<h1>Arms Workout</h1>
+<p>Build bigger, stronger biceps and triceps with focused arm training.</p>
+<div class="exercise-grid">
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80" alt="Bicep curl"><h3>Bicep Curl</h3><p>Grow the biceps with control.</p><ol class="exercise-procedure"><li>Stand tall with dumbbells at your sides.</li><li>Curl the weight up without moving your elbows.</li><li>Lower the dumbbells slowly.</li></ol></div>
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80&sat=-100" alt="Hammer curl"><h3>Hammer Curl</h3><p>Build forearms and arm thickness.</p><ol class="exercise-procedure"><li>Hold dumbbells with palms facing each other.</li><li>Curl the weights toward your shoulders.</li><li>Control the lowering phase.</li></ol></div>
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80&blur=1" alt="Tricep dips"><h3>Tricep Dips</h3><p>Develop pressing strength and triceps.</p><ol class="exercise-procedure"><li>Place hands on a bench or parallel bars.</li><li>Lower your body by bending the elbows.</li><li>Press back up using the triceps.</li></ol></div>
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80&h=700" alt="Skull crushers"><h3>Skull Crushers</h3><p>Target the triceps directly.</p><ol class="exercise-procedure"><li>Lie down holding dumbbells or an EZ bar above you.</li><li>Bend the elbows to lower the weight near your forehead.</li><li>Extend the arms back up.</li></ol></div>
+</div>
+<div class="page-actions">
+<a href="inex.html#exercises" class="btn">Back to Exercises</a>
+<a href="inex.html" class="btn btn-primary">Go Home</a>
+</div>
+</div>
+</div>
+</body>
+</html>

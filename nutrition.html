@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutrition - Sweatify</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-wrap{width:min(900px, calc(100% - 32px)); margin:40px auto 70px;}
+.page-card{background:#fff; border:1px solid #dfeae5; border-radius:16px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.05);} 
+.page-card h1{margin-top:0; color:#1a202c;}
+.page-card ul{padding-left:20px; color:#4f605a; line-height:1.7;}
+.page-img{width:100%; height:260px; object-fit:cover; border-radius:12px; margin-bottom:18px;}
+.page-actions{margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;}
+
+/* Nutrition Builder Styles */
+.builder-container{margin-top:30px; padding:20px; background:#f9fdfb; border-radius:12px; border:1px solid #dfeae5;}
+.builder-title{color:#1a202c; font-size:18px; font-weight:600; margin-bottom:20px;}
+
+.builder-section{display:none;}
+.builder-section.active{display:block;}
+
+.options-grid{display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:20px;}
+.option-btn{background:white; border:2px solid #dfeae5; padding:20px; border-radius:10px; cursor:pointer; text-align:center; transition:all 0.3s ease; font-size:16px; font-weight:500; color:#1a202c;}
+.option-btn:hover{border-color:#42564F; box-shadow:0 5px 15px rgba(66, 86, 79, 0.15);}
+.option-btn.selected{background:#42564F; color:white; border-color:#42564F;}
+.option-btn .icon{font-size:32px; margin-bottom:8px; display:block;}
+
+.foods-grid{display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:20px;}
+.food-card{background:white; border:2px solid #dfeae5; padding:20px; border-radius:10px; text-align:center; transition:all 0.3s ease;}
+.food-card:hover{border-color:#42564F; box-shadow:0 5px 15px rgba(66, 86, 79, 0.15); transform:translateY(-3px);}
+.food-card .food-icon{font-size:40px; margin-bottom:10px; display:block;}
+.food-card h4{margin:10px 0; color:#1a202c; font-size:16px;}
+.food-card .macros{color:#42564F; font-weight:600; font-size:13px; margin:8px 0;}
+.food-card p{margin:8px 0; color:#666; font-size:13px;}
+.food-card .benefits{list-style:none; padding:0; margin:10px 0 0 0; font-size:12px; color:#666;}
+.food-card .benefits li{margin:4px 0;}
+
+.plan-cards-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px;}
+.plan-card{background:white; border:2px solid #dfeae5; padding:20px; border-radius:10px; cursor:pointer; text-align:center; transition:all 0.3s ease;}
+.plan-card:hover{border-color:#42564F; box-shadow:0 5px 15px rgba(66, 86, 79, 0.15);}
+.plan-card h4{margin:0 0 10px 0; color:#1a202c;}
+.plan-card p{margin:0; font-size:13px; color:#666;}
+.plan-card ul{margin:12px 0 0 0; padding-left:18px; font-size:13px; color:#666; text-align:left;}
+.plan-card li{margin:4px 0;}
+
+.builder-actions{display:flex; gap:10px; margin-top:20px;}
+.btn-back{background:#dfeae5; color:#1a202c; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-size:14px; font-weight:500;}
+.btn-back:hover{background:#cce2db;}
+
+.selection-summary{background:white; padding:15px; border-radius:8px; border-left:4px solid #42564F; margin-bottom:20px; font-size:14px;}
+.selection-summary strong{color:#42564F;}
+
+.plan-details{background:#f0f5f2; padding:20px; border-radius:10px; margin-top:20px; border-left:4px solid #42564F;}
+.plan-details h3{margin-top:0; color:#1a202c;}
+.plan-details ul{padding-left:20px; color:#555;}
+.plan-details li{margin:8px 0;}
+
+@media(max-width:768px){
+.options-grid{grid-template-columns:1fr;}
+.plan-cards-grid{grid-template-columns:1fr;}
+.foods-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+<div class="page-card">
+<img class="page-img" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=80" alt="Nutrition plans">
+<h1>Nutrition Plans</h1>
+<p>Personalized meal plans tailored to your gender, fitness goals, and dietary preferences. Select your preferences below to find the perfect nutrition program for you.</p>
+
+<!-- Nutrition Builder -->
+<div class="builder-container">
+<div class="builder-title">🍽️ Find Your Perfect Nutrition Plan</div>
+
+<!-- Step 1: Gender Selection -->
+<div class="builder-section active" id="step1">
+<p style="color:#666; margin-bottom:15px;">Step 1: Select Your Gender</p>
+<div class="options-grid">
+<button class="option-btn" onclick="selectGender('male')">
+<span class="icon">👨</span>
+Male
+</button>
+<button class="option-btn" onclick="selectGender('female')">
+<span class="icon">👩</span>
+Female
+</button>
+</div>
+</div>
+
+<!-- Step 2: Goal Selection -->
+<div class="builder-section" id="step2">
+<p style="color:#666; margin-bottom:15px;">Step 2: Select Your Nutrition Goal</p>
+<div class="selection-summary">Selected Gender: <strong id="selected-gender"></strong></div>
+<div class="options-grid">
+<button class="option-btn" onclick="selectGoal('gain')">
+<span class="icon">💪</span>
+Weight Gain / Muscle Building
+</button>
+<button class="option-btn" onclick="selectGoal('loss')">
+<span class="icon">🔥</span>
+Weight Loss / Fat Burning
+</button>
+</div>
+<div class="builder-actions">
+<button class="btn-back" onclick="backToStep(1)">Back</button>
+</div>
+</div>
+
+<!-- Step 3: Key Foods Selection -->
+<div class="builder-section" id="step3">
+<p style="color:#666; margin-bottom:15px;">Step 3: Key Foods for Your Goal</p>
+<div class="selection-summary">
+Selected: <strong id="foods-gender-display"></strong> | Goal: <strong id="foods-goal-display"></strong>
+</div>
+<p style="color:#555; margin-bottom:15px; font-size:14px;">These are the essential foods you should focus on in your nutrition plan:</p>
+<div class="foods-grid" id="foods-grid">
+<!-- Foods will be populated by JavaScript -->
+</div>
+<div class="builder-actions">
+<button class="btn btn-primary" onclick="continueToPlans()" style="flex:1;">Continue to Nutrition Plans</button>
+<button class="btn-back" onclick="backToStep(2)">Back</button>
+</div>
+</div>
+
+<!-- Step 4: Nutrition Plan Selection -->
+<div class="builder-section" id="step4">
+<p style="color:#666; margin-bottom:15px;">Step 4: Choose Your Nutrition Plan</p>
+<div class="selection-summary">
+Selected: <strong id="selected-gender-display"></strong> | Goal: <strong id="selected-goal-display"></strong>
+</div>
+<div class="plan-cards-grid" id="plans-grid">
+<!-- Plans will be populated by JavaScript -->
+</div>
+<div class="builder-actions">
+<button class="btn-back" onclick="backToStep(3)">Back</button>
+</div>
+</div>
+
+<!-- Step 5: Plan Details -->
+<div class="builder-section" id="step5">
+<div class="selection-summary">
+✓ Gender: <strong id="final-gender"></strong> | ✓ Goal: <strong id="final-goal"></strong> | ✓ Plan: <strong id="final-plan"></strong>
+</div>
+<div class="plan-details" id="plan-details-content">
+<!-- Details will be populated by JavaScript -->
+</div>
+<button class="btn btn-primary" style="margin-top:15px;" onclick="enrollPlan()">Start This Nutrition Plan</button>
+<div class="builder-actions">
+<button class="btn-back" onclick="backToStep(4)">Back</button>
+</div>
+</div>
+</div>
+
+<div class="page-actions">
+<a href="inex.html#services" class="btn">Back to Services</a>
+<a href="inex.html" class="btn btn-primary">Go Home</a>
+</div>
+</div>
+</div>
+
+<script>
+let selectedGender = '';
+let selectedGoal = '';
+let selectedPlan = '';
+
+const foods = {
+  gain: [
+    { name: 'Chicken Breast', icon: '🍗', macros: 'P: 31g | C: 0g | F: 3g', desc: 'Lean protein source', benefits: ['High Protein', 'Low Fat', 'Affordable'] },
+    { name: 'Eggs', icon: '🥚', macros: 'P: 6g | C: 1g | F: 5g', desc: 'Complete amino acids', benefits: ['Complete Protein', 'B Vitamins', 'Choline'] },
+    { name: 'Brown Rice', icon: '🍚', macros: 'P: 5g | C: 45g | F: 2g', desc: 'Complex carbs', benefits: ['Energy', 'Fiber', 'Minerals'] },
+    { name: 'Sweet Potato', icon: '🥔', macros: 'P: 2g | C: 21g | F: 0.1g', desc: 'Nutrient-dense carbs', benefits: ['Vitamin A', 'Potassium', 'Fiber'] },
+    { name: 'Salmon', icon: '🐟', macros: 'P: 25g | C: 0g | F: 13g', desc: 'Omega-3 rich', benefits: ['Omega-3s', 'Vitamin D', 'Protein'] },
+    { name: 'Almonds', icon: '🌰', macros: 'P: 6g | C: 6g | F: 14g', desc: 'Healthy fats', benefits: ['Healthy Fats', 'Vitamin E', 'Minerals'] },
+    { name: 'Whole Wheat Bread', icon: '🍞', macros: 'P: 4g | C: 14g | F: 1g', desc: 'Whole grain carbs', benefits: ['Fiber', 'B Vitamins', 'Sustained Energy'] },
+    { name: 'Cottage Cheese', icon: '🧀', macros: 'P: 28g | C: 3g | F: 5g', desc: 'Casein protein', benefits: ['Slow Protein', 'Calcium', 'Filling'] }
+  ],
+  loss: [
+    { name: 'Broccoli', icon: '🥦', macros: 'P: 4g | C: 7g | F: 0.4g', desc: 'Low calorie, high volume', benefits: ['Low Calorie', 'Fiber', 'Vitamins'] },
+    { name: 'Chicken Breast', icon: '🍗', macros: 'P: 31g | C: 0g | F: 3g', desc: 'Lean protein source', benefits: ['High Protein', 'Satiating', 'Low Calorie'] },
+    { name: 'Green Tea', icon: '🍵', macros: 'P: 0g | C: 0g | F: 0g', desc: 'Metabolism booster', benefits: ['Catechins', 'Zero Calorie', 'Antioxidants'] },
+    { name: 'Spinach', icon: '🥬', macros: 'P: 3g | C: 4g | F: 0.4g', desc: 'Nutrient dense', benefits: ['Low Calorie', 'Iron', 'Magnesium'] },
+    { name: 'Salmon', icon: '🐟', macros: 'P: 25g | C: 0g | F: 13g', desc: 'Protein & healthy fats', benefits: ['Satiety', 'Omega-3s', 'Vitamin D'] },
+    { name: 'Greek Yogurt', icon: '🥛', macros: 'P: 10g | C: 3g | F: 0.4g', desc: 'High protein dairy', benefits: ['Probiotics', 'Protein', 'Low Calorie'] },
+    { name: 'Apple', icon: '🍎', macros: 'P: 0.3g | C: 25g | F: 0.2g', desc: 'Fiber rich fruit', benefits: ['Fiber', 'Vitamins', 'Satiety'] },
+    { name: 'Bell Peppers', icon: '🫑', macros: 'P: 1g | C: 6g | F: 0.3g', desc: 'Vitamin C rich', benefits: ['Vitamin C', 'Low Calorie', 'Crunchy'] }
+  ]
+};
+
+const nutritionPlans = {
+  male: {
+    gain: [
+      {
+        name: 'High Protein Bulk',
+        desc: 'Maximum muscle growth',
+        details: [
+          'Daily Calories: 3000-3500 (surplus)',
+          'Protein: 200-220g (1.2g per lb)',
+          'Carbs: 375-450g',
+          'Fats: 85-100g',
+          'Meal frequency: 5-6 meals per day',
+          'Pre/Post workout nutrition: Critical',
+          'Supplements: Whey, Creatine, Multivitamin'
+        ]
+      },
+      {
+        name: 'Lean Gain Mass',
+        desc: 'Controlled muscle building',
+        details: [
+          'Daily Calories: 2500-2800 (moderate surplus)',
+          'Protein: 180-200g',
+          'Carbs: 300-375g',
+          'Fats: 70-85g',
+          'Meal frequency: 4-5 meals per day',
+          'Focus on whole foods',
+          'Strength training emphasis'
+        ]
+      },
+      {
+        name: 'Strength Focused',
+        desc: 'Performance nutrition',
+        details: [
+          'Daily Calories: 2300-2600',
+          'Protein: 170-190g',
+          'Carbs: 275-340g',
+          'Fats: 65-75g',
+          'Timing: Meals around workouts',
+          'Focus on recovery foods',
+          'Hydration: 3-4L daily'
+        ]
+      }
+    ],
+    loss: [
+      {
+        name: 'Aggressive Fat Loss',
+        desc: 'Rapid results program',
+        details: [
+          'Daily Calories: 2000-2200 (500 cal deficit)',
+          'Protein: 200-220g (high to preserve muscle)',
+          'Carbs: 200-250g',
+          'Fats: 55-65g',
+          'Meal frequency: 4-5 meals per day',
+          'High fiber foods: essential',
+          'Cardio: 5-6 days per week'
+        ]
+      },
+      {
+        name: 'Balanced Fat Loss',
+        desc: 'Sustainable approach',
+        details: [
+          'Daily Calories: 2300-2500 (300 cal deficit)',
+          'Protein: 180-200g',
+          'Carbs: 250-300g',
+          'Fats: 65-75g',
+          'Meal frequency: 4 meals per day',
+          'Flexible diet allowed',
+          'Mix of cardio & strength'
+        ]
+      },
+      {
+        name: 'Metabolic Boost',
+        desc: 'Optimize metabolic rate',
+        details: [
+          'Daily Calories: 2400-2700 (cycling)',
+          'Protein: 190-210g',
+          'Carbs: 280-340g (carb cycling)',
+          'Fats: 60-75g',
+          'High NEAT activities',
+          'Intermittent fasting option',
+          'Strategic refeed days: 1x per week'
+        ]
+      }
+    ]
+  },
+  female: {
+    gain: [
+      {
+        name: 'Feminine Lean Gain',
+        desc: 'Toned muscle building',
+        details: [
+          'Daily Calories: 2000-2300 (surplus)',
+          'Protein: 130-150g (1.2g per lb)',
+          'Carbs: 200-250g',
+          'Fats: 65-75g',
+          'Meal frequency: 4-5 meals per day',
+          'Focus on glutes & legs',
+          'Strength training 4x per week'
+        ]
+      },
+      {
+        name: 'Balanced Build',
+        desc: 'Full body development',
+        details: [
+          'Daily Calories: 1800-2100 (moderate surplus)',
+          'Protein: 120-140g',
+          'Carbs: 180-220g',
+          'Fats: 60-70g',
+          'Whole foods priority',
+          'Flexibility training included',
+          'Recovery focus'
+        ]
+      },
+      {
+        name: 'Curves & Strength',
+        desc: 'Athletic development',
+        details: [
+          'Daily Calories: 1900-2200',
+          'Protein: 125-145g',
+          'Carbs: 190-240g',
+          'Fats: 60-70g',
+          'Meal prep friendly',
+          'Instagram-worthy meals allowed',
+          '80/20 clean eating rule'
+        ]
+      }
+    ],
+    loss: [
+      {
+        name: 'Lean & Fit',
+        desc: 'Gentle fat loss',
+        details: [
+          'Daily Calories: 1600-1800 (300 cal deficit)',
+          'Protein: 130-150g (important)',
+          'Carbs: 150-190g',
+          'Fats: 50-60g',
+          'Meal frequency: 3-4 meals per day',
+          'Hydration: 2-3L daily',
+          'Cardio: 3-4x per week (light to moderate)'
+        ]
+      },
+      {
+        name: 'Toned Definition',
+        desc: 'Visible results focus',
+        details: [
+          'Daily Calories: 1700-1900 (250 cal deficit)',
+          'Protein: 140-160g',
+          'Carbs: 170-210g',
+          'Fats: 55-65g',
+          'Flexible options available',
+          'Social meals allowed',
+          'Rest days: 2 per week'
+        ]
+      },
+      {
+        name: 'Wellness Focus',
+        desc: 'Holistic health approach',
+        details: [
+          'Daily Calories: 1750-1950 (maintenance nearby)',
+          'Protein: 120-140g',
+          'Carbs: 190-230g',
+          'Fats: 60-70g',
+          'Intuitive eating principles',
+          'Yoga & mobility emphasis',
+          'Mental health priority'
+        ]
+      }
+    ]
+  }
+};
+
+function selectGender(gender) {
+  selectedGender = gender;
+  document.querySelectorAll('#step1 .option-btn').forEach(btn => btn.classList.remove('selected'));
+  event.target.closest('.option-btn').classList.add('selected');
+  
+  document.getElementById('selected-gender').textContent = gender === 'male' ? 'Male' : 'Female';
+  showStep(2);
+}
+
+function selectGoal(goal) {
+  selectedGoal = goal;
+  document.querySelectorAll('#step2 .option-btn').forEach(btn => btn.classList.remove('selected'));
+  event.target.closest('.option-btn').classList.add('selected');
+  
+  document.getElementById('foods-gender-display').textContent = selectedGender === 'male' ? 'Male' : 'Female';
+  document.getElementById('foods-goal-display').textContent = goal === 'gain' ? 'Muscle Gain' : 'Fat Loss';
+  document.getElementById('selected-gender-display').textContent = selectedGender === 'male' ? 'Male' : 'Female';
+  document.getElementById('selected-goal-display').textContent = goal === 'gain' ? 'Muscle Gain' : 'Fat Loss';
+  
+  populateFoods(goal);
+  showStep(3);
+}
+
+function populateFoods(goal) {
+  const foodList = foods[goal];
+  const grid = document.getElementById('foods-grid');
+  grid.innerHTML = '';
+  
+  foodList.forEach(food => {
+    const card = document.createElement('div');
+    card.className = 'food-card';
+    card.innerHTML = `
+      <span class="food-icon">${food.icon}</span>
+      <h4>${food.name}</h4>
+      <div class="macros">${food.macros}</div>
+      <p>${food.desc}</p>
+      <ul class="benefits">
+        <li>${food.benefits.join(' • ')}</li>
+      </ul>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function continueToPlans() {
+  populatePlans(selectedGoal);
+}
+
+function populatePlans(goal) {
+  const plans = nutritionPlans[selectedGender][goal];
+  const grid = document.getElementById('plans-grid');
+  grid.innerHTML = '';
+  
+  plans.forEach((plan, index) => {
+    const card = document.createElement('div');
+    card.className = 'plan-card';
+    card.onclick = () => selectPlan(plan.name, plan.details, index);
+    card.innerHTML = `
+      <h4>${plan.name}</h4>
+      <p>${plan.desc}</p>
+      <ul>
+        <li>${plan.details[0]}</li>
+        <li>${plan.details[1]}</li>
+      </ul>
+    `;
+    grid.appendChild(card);
+  });
+  showStep(4);
+}
+
+function selectPlan(planName, planDetails, index) {
+  selectedPlan = planName;
+  document.querySelectorAll('#step4 .plan-card').forEach(card => card.style.borderColor = '#dfeae5');
+  event.currentTarget.style.borderColor = '#42564F';
+  event.currentTarget.style.boxShadow = '0 5px 15px rgba(66, 86, 79, 0.15)';
+  
+  document.getElementById('final-gender').textContent = selectedGender === 'male' ? 'Male' : 'Female';
+  document.getElementById('final-goal').textContent = selectedGoal === 'gain' ? 'Muscle Gain' : 'Fat Loss';
+  document.getElementById('final-plan').textContent = planName;
+  
+  const detailsHtml = `
+    <h3>${planName}</h3>
+    <ul>
+      ${planDetails.map(detail => `<li>${detail}</li>`).join('')}
+    </ul>
+    <p style="margin-top:15px; padding:15px; background:white; border-radius:6px; color:#555; font-size:14px;">
+      💡 <strong>Tip:</strong> This nutrition plan is customized for ${selectedGender === 'male' ? 'male' : 'female'} physiology and optimized for ${selectedGoal === 'gain' ? 'muscle building' : 'fat loss'}. Track your meals consistently and adjust based on progress every 2 weeks.
+    </p>
+  `;
+  document.getElementById('plan-details-content').innerHTML = detailsHtml;
+  
+  showStep(5);
+}
+
+function showStep(step) {
+  document.querySelectorAll('.builder-section').forEach(section => section.classList.remove('active'));
+  document.getElementById(`step${step}`).classList.add('active');
+}
+
+function backToStep(step) {
+  showStep(step);
+  if(step === 1) {
+    selectedGender = '';
+    selectedGoal = '';
+    selectedPlan = '';
+  } else if(step === 2) {
+    selectedGoal = '';
+    selectedPlan = '';
+  } else if(step === 3) {
+    selectedPlan = '';
+  } else if(step === 4) {
+    selectedPlan = '';
+    populatePlans(selectedGoal);
+  }
+}
+
+function enrollPlan() {
+  alert(`Successfully started nutrition plan:\nGender: ${selectedGender}\nGoal: ${selectedGoal}\nPlan: ${selectedPlan}\n\nYour personalized nutrition plan and meal prep guide are ready! Check your account.`);
+}
+</script>
+</body>
+</html>

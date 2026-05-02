@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core Workout - Sweatify</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-wrap{width:min(980px, calc(100% - 32px)); margin:40px auto 70px;}
+.page-card{background:#fff; border:1px solid #dfeae5; border-radius:16px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.05);} 
+.page-card h1{margin-top:0; color:#1a202c;}
+.page-img{width:100%; height:300px; object-fit:cover; border-radius:12px; margin-bottom:18px;}
+.exercise-grid{display:flex; flex-direction:column; gap:16px; margin-top:18px;}
+.exercise-item{border:1px solid #dfeae5; border-radius:14px; overflow:hidden; background:#f8fbf9; box-shadow:0 6px 16px rgba(0,0,0,0.04); display:grid; grid-template-columns:minmax(0,1fr) 230px; column-gap:14px; align-items:stretch; padding:12px;}
+.exercise-item img{grid-column:2; grid-row:1 / span 3; width:100%; height:100%; min-height:170px; object-fit:cover; display:block; border-radius:10px;}
+.exercise-item h3{grid-column:1; font-size:16px; margin:0 0 6px; color:#1a202c;}
+.exercise-item p{grid-column:1; font-size:13px; margin:0 0 10px; color:#55655f; line-height:1.5;}
+.exercise-item .exercise-procedure{grid-column:1; margin:0;}
+@media (max-width:700px){.exercise-item{grid-template-columns:1fr;} .exercise-item img{grid-column:1; grid-row:auto; min-height:140px; margin-bottom:10px;}}
+.page-actions{margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+<div class="page-card">
+<img class="page-img" src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=1200&q=80" alt="Core workout">
+<h1>Core Workout</h1>
+<p>Strengthen your abs and lower back for balance and stability.</p>
+<div class="exercise-grid">
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=900&q=80" alt="Plank"><h3>Plank</h3><p>Full core control and bracing.</p><ol class="exercise-procedure"><li>Place forearms on the floor and keep your body straight.</li><li>Brace your core and hold your hips level.</li><li>Maintain steady breathing throughout the hold.</li></ol></div>
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=900&q=80&sat=-100" alt="Dead bug"><h3>Dead Bug</h3><p>Deep abdominal strength and stability.</p><ol class="exercise-procedure"><li>Lie on your back with arms up and knees bent.</li><li>Extend opposite arm and leg slowly.</li><li>Return to center and switch sides.</li></ol></div>
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=900&q=80&blur=1" alt="Mountain climbers"><h3>Mountain Climbers</h3><p>Build endurance and core engagement.</p><ol class="exercise-procedure"><li>Start in a plank position.</li><li>Drive knees toward your chest one at a time.</li><li>Keep your hips low and core tight.</li></ol></div>
+<div class="exercise-item"><img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=900&q=80&h=700" alt="Leg raises"><h3>Leg Raises</h3><p>Focus on lower abs.</p><ol class="exercise-procedure"><li>Lie flat and keep hands under your hips.</li><li>Lift both legs up slowly without swinging.</li><li>Lower them with control before touching the floor.</li></ol></div>
+</div>
+<div class="page-actions">
+<a href="inex.html#exercises" class="btn">Back to Exercises</a>
+<a href="inex.html" class="btn btn-primary">Go Home</a>
+</div>
+</div>
+</div>
+</body>
+</html>

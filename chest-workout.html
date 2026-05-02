@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chest Workout - Sweatify</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-wrap{width:min(980px, calc(100% - 32px)); margin:40px auto 70px;}
+.page-card{background:#fff; border:1px solid #dfeae5; border-radius:16px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.05);} 
+.page-card h1{margin-top:0; color:#1a202c;}
+.page-img{width:100%; height:300px; object-fit:cover; border-radius:12px; margin-bottom:18px;}
+.exercise-grid{display:flex; flex-direction:column; gap:16px; margin-top:18px;}
+.exercise-item{border:1px solid #dfeae5; border-radius:14px; overflow:hidden; background:#f8fbf9; box-shadow:0 6px 16px rgba(0,0,0,0.04); display:grid; grid-template-columns:minmax(0,1fr) 230px; column-gap:14px; align-items:stretch; padding:12px;}
+.exercise-item img{grid-column:2; grid-row:1 / span 3; width:100%; height:100%; min-height:170px; object-fit:cover; display:block; border-radius:10px;}
+.exercise-item h3{grid-column:1; font-size:16px; margin:0 0 6px; color:#1a202c;}
+.exercise-item p{grid-column:1; font-size:13px; margin:0 0 10px; color:#55655f; line-height:1.5;}
+.exercise-item .exercise-procedure{grid-column:1; margin:0;}
+@media (max-width:700px){.exercise-item{grid-template-columns:1fr;} .exercise-item img{grid-column:1; grid-row:auto; min-height:140px; margin-bottom:10px;}}
+.page-actions{margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+<div class="page-card">
+<img class="page-img" src="pic/arms.jpeg" alt="Chest workout">
+<h1>Chest Workout</h1>
+<p>Build a stronger chest with pressing and bodyweight movements.</p>
+<div class="exercise-grid">
+<div class="exercise-item"><img src="pic/Trizeps Übungen im Überblick – so bekommst Du große Oberarme.gif" alt="Push-ups"><h3>Push-ups</h3><p>Bodyweight strength and control.</p><ol class="exercise-procedure"><li>Place hands under shoulders and keep your body straight.</li><li>Lower your chest until it is close to the floor.</li><li>Press back up while keeping your core tight.</li></ol></div>
+<div class="exercise-item"><img src="pic/_.gif" alt="Bench press"><h3>Bench Press</h3><p>Build chest mass and pressing power.</p><ol class="exercise-procedure"><li>Lie on the bench with feet planted and shoulder blades tight.</li><li>Lower the bar to mid-chest with control.</li><li>Press the bar back up to full extension.</li></ol></div>
+<div class="exercise-item"><img src="pic/Incline Dumbbell Bench Press.gif" alt="Incline dumbbell press"><h3>Incline Dumbbell Press</h3><p>Targets the upper chest.</p><ol class="exercise-procedure"><li>Set the bench at a 30 to 45 degree angle.</li><li>Lower the dumbbells slowly to chest level.</li><li>Press up and squeeze the upper chest at the top.</li></ol></div>
+<div class="exercise-item"><img src="pic/_ (1).gif" alt="Chest fly"><h3>Chest Fly</h3><p>Improves stretch and isolation.</p><ol class="exercise-procedure"><li>Keep a slight bend in your elbows throughout the movement.</li><li>Open your arms wide until you feel a chest stretch.</li><li>Bring the dumbbells together over your chest.</li></ol></div>
+</div>
+<div class="page-actions">
+<a href="inex.html#exercises" class="btn">Back to Exercises</a>
+<a href="inex.html" class="btn btn-primary">Go Home</a>
+</div>
+</div>
+</div>
+</body>
+</html>
